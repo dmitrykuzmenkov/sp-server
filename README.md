@@ -1,6 +1,13 @@
 # sp-server
 Node.js simple Single Page Server
 
+## Installation
+Just use npm install
+
+```bash
+npm install sp-server
+```
+
 ## Usage
 Follow example
 
