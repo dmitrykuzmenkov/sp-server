@@ -74,6 +74,7 @@ module.exports = function (html_root, entry_file) {
 
               fs.stat(filename, function (err, stat) {
                 if (!err && stat.isFile()) {
+                  clearTimeout(timeout);
                   fs.createReadStream(filename).pipe(res);
                   return;
                 }

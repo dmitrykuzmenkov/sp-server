@@ -1,6 +1,6 @@
 {
   "name": "sp-server",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Single Page Server for html-page replacements",
   "main": "index.js",
   "scripts": {
