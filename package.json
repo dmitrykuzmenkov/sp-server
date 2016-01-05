@@ -1,6 +1,6 @@
 {
   "name": "sp-server",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Single Page Server for html-page replacements",
   "main": "index.js",
   "scripts": {
@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/dmitrykuzmenkov/sp-server/issues"
   },
-  "homepage": "https://github.com/dmitrykuzmenkov/sp-server#readme"
+  "homepage": "https://github.com/dmitrykuzmenkov/sp-server#readme",
+  "dependencies": {
+    "mime": "^1.3.4"
+  }
 }

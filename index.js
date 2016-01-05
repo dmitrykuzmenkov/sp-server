@@ -3,6 +3,7 @@ var http = require('http');
 var url = require('url');
 var path = require('path');
 var fs = require('fs');
+var mime = require('mime');
 var cpu_num = require('os').cpus().length;
 
 module.exports = function (html_root, entry_file) {
@@ -75,6 +76,7 @@ module.exports = function (html_root, entry_file) {
               fs.stat(filename, function (err, stat) {
                 if (!err && stat.isFile()) {
                   clearTimeout(timeout);
+                  res.writeHead(200, {'Content-type': mime.lookup(filename)});
                   fs.createReadStream(filename).pipe(res);
                   return;
                 }
