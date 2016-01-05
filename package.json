@@ -1,0 +1,27 @@
+{
+  "name": "sp-server",
+  "version": "0.1.0",
+  "description": "Single Page Server for html-page replacements",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmitrykuzmenkov/sp-server.git"
+  },
+  "keywords": [
+    "single",
+    "page",
+    "html",
+    "spa",
+    "server",
+    "opengraph"
+  ],
+  "author": "Dmitry Kuzmenkov <dmitry@wagh.ru> (http://dmitrykuzmenkov.ru)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dmitrykuzmenkov/sp-server/issues"
+  },
+  "homepage": "https://github.com/dmitrykuzmenkov/sp-server#readme"
+}
