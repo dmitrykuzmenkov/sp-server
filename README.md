@@ -18,8 +18,8 @@ server('./build', 'index.html')
   .on('/', function (page, params, callback) {
     callback(page.replace('<!-- OPENGRAPH -->', opengraph));
   })
-  .on('/([0-9])', function (page, params, callback) {
-    console.log(params);
+  .on('/:id', function (page, params, callback) {
+    console.log(params); // {id: 123}
     callback(page);
   })
   .start(8080)

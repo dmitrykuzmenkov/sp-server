@@ -6,6 +6,8 @@ var fs = require('fs');
 var mime = require('mime');
 var cpu_num = require('os').cpus().length;
 
+var param_re =/\:[^\:\/]+/g;
+
 module.exports = function (html_root, entry_file) {
   var html_file = path.join(html_root, entry_file);
   var html = fs.readFileSync(html_file, 'utf8');
@@ -14,7 +16,18 @@ module.exports = function (html_root, entry_file) {
     routes: [],
     // callback applies html of entry file, matched params, callback to call after finish
     on: function (route, callback) {
-      this.routes[route] = callback;
+      var match;
+      var params = [];
+      while (match = param_re.exec(route)) {
+        params.push(match[0].substring(1));
+      }
+
+      this.routes.push({
+        route: route,
+        regexp: new RegExp('^\/?' + route.replace(param_re, '([^\:\/]+?)') + '\/?$'),
+        params: params,
+        callback: callback
+      });
       return this;
     },
     start: function (port) {
@@ -45,16 +58,21 @@ module.exports = function (html_root, entry_file) {
           var req_path = url.parse(req.url).pathname;
           var has_match = false;
 
-          var matches;
-          for (var r in _this.routes) {
-            matches = (new RegExp('^\/?' + r + '\/?$')).exec(req_path);
+          _this.routes.forEach(function(r) {
+            var matches;
+            var params = {};
+            matches = r.regexp.exec(req_path);
             if (matches) {
-              console.log(req_path, 'matches', r);
-              _this.routes[r](html, matches, callback);
+              console.log(req_path, 'matches', r.route);
+              for (var k in r.params) {
+                params[r.params[k]] = matches[(k + 1) | 0];
+              }
+
+              r.callback(html, params, callback);
               has_match = true;
-              break;
+              return;
             }
-          }
+          });
 
           // Static files
           if (!has_match) {
